@@ -55,14 +55,14 @@
   .slot .n{font-size:8.5px;color:#bbb}
   .slot.empty{opacity:.32;border-style:dashed}
   .tabs{display:flex;gap:10px}
-  .tab{padding:8px 22px;border-radius:11px;border:1px solid #2a2a30;background:#16161b;color:#bbb;
-    font-size:14px;font-weight:800;cursor:pointer}
+  .tab{padding:8px 15px;border-radius:11px;border:1px solid #2a2a30;background:#16161b;color:#bbb;
+    font-size:13.5px;font-weight:800;cursor:pointer}
   .tab.on{color:#1a1400;background:linear-gradient(135deg,#FFE070,var(--theme));border-color:transparent}
   .hint{font-size:11px;color:#666}
 </style></head>
 <body>
-  <div class="card" id="card" style="--theme:#FFC233">
-    <div class="heroWrap" id="heroWrap"><img class="hero" id="hero" src="img/qian_full.png" alt=""></div>
+  <div class="card" id="card" style="--theme:#A66BFF">
+    <div class="heroWrap" id="heroWrap"><img class="hero" id="hero" src="img/kevin_full.png" alt=""></div>
     <div class="parts" id="parts"></div>
     <div class="vig"></div>
     <div class="top">
@@ -79,13 +79,19 @@
     </div>
   </div>
   <div class="tabs">
-    <button class="tab on" id="t_qian" onclick="show('qian')">钱钱</button>
+    <button class="tab on" id="t_kevin" onclick="show('kevin')">Kevin M</button>
+    <button class="tab" id="t_qian" onclick="show('qian')">钱钱</button>
     <button class="tab" id="t_shuang" onclick="show('shuang')">爽哥</button>
   </div>
   <div class="hint">点标签切换角色 · 移动鼠标 / 倾斜手机 看视差</div>
 
 <script>
 const DATA = {
+  kevin: {name:'Kevin M', title:'🎯 冷静操盘手', rank:'RANK 8', theme:'#A66BFF',
+    hero:'img/kevin_full.png', ava:'img/kevin_avatar.png',
+    stats:{pts:6, coins:20, games:1},
+    badges:['red_glow'],
+    items:[['🥃','威士忌'],['♠️','黑桃A'],['🎯','准星'],null,null]},
   qian: {name:'钱钱', title:'💰 赌桌大亨', rank:'RANK 1', theme:'#FFC233',
     hero:'img/qian_full.png', ava:'img/qian_avatar.png',
     stats:{pts:128, coins:86, games:19},
@@ -113,8 +119,7 @@ function show(k){
   $('items').innerHTML = d.items.map(it => it
     ? `<div class="slot"><div class="e">${it[0]}</div><div class="n">${it[1]}</div></div>`
     : `<div class="slot empty"><div class="e">＋</div></div>`).join('');
-  $('t_qian').classList.toggle('on', k==='qian');
-  $('t_shuang').classList.toggle('on', k==='shuang');
+  ['kevin','qian','shuang'].forEach(x => $('t_'+x).classList.toggle('on', x===k));
 }
 // floating particles
 $('parts').innerHTML = Array.from({length:16}, (_,i)=>{
@@ -129,6 +134,6 @@ card.addEventListener('pointermove', e=>{ const r=card.getBoundingClientRect();
 card.addEventListener('pointerleave', ()=>px(0,0));
 window.addEventListener('deviceorientation', e=>{
   if(e.gamma==null) return; px(Math.max(-.5,Math.min(.5,e.gamma/45)), Math.max(-.5,Math.min(.5,(e.beta-40)/45))); });
-show('qian');
+show('kevin');
 </script>
 </body></html>
