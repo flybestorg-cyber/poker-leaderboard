@@ -2,8 +2,9 @@
 <html lang="zh"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>角色卡 Demo · 德州荣耀</title>
+<title>角色卡 · 德州荣耀</title>
 <style>
+
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:radial-gradient(120% 60% at 50% 0%,#15161c,#070709 60%);color:#fff;
     font-family:-apple-system,"PingFang SC",system-ui,sans-serif;min-height:100vh;
@@ -87,16 +88,30 @@
   .r-common{background:rgba(192,192,197,.18);color:#c8c8cd}.r-rare{background:rgba(90,200,250,.18);color:#5ac8fa}
   .r-legendary{background:rgba(255,199,0,.18);color:#FFC700}
   .lbh{color:#666;font-size:12px;margin-top:18px}
+
+  .hdr{font-size:15px;font-weight:800;color:#e8e8ee;letter-spacing:.5px;margin-top:2px}
+  .hdr small{color:#888;font-weight:600;font-size:11px;margin-left:6px}
+  .roster{display:flex;gap:7px;overflow-x:auto;width:min(380px,92vw);padding:2px 2px 6px;flex:none;scrollbar-width:none}
+  .roster::-webkit-scrollbar{display:none}
+  .rchip{flex:none;width:52px;text-align:center;cursor:pointer;opacity:.55;transition:opacity .15s;-webkit-tap-highlight-color:transparent}
+  .rchip.on{opacity:1}
+  .rava{width:44px;height:44px;border-radius:50%;margin:0 auto;background-size:cover;background-position:center 12%;
+    border:2px solid #2a2a30;transition:border-color .15s,box-shadow .15s}
+  .rchip.on .rava{border-color:var(--rc);box-shadow:0 0 12px -1px var(--rc)}
+  .rnm{font-size:9px;color:#aaa;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rchip.on .rnm{color:#fff;font-weight:700}
+  .rrk{font-size:8px;color:#777;font-weight:700}
 </style></head>
 <body>
+  <div class="hdr">🏆 德州荣耀 · 角色卡<small>Season S1</small></div>
   <div class="card" id="card" style="--theme:#A66BFF">
-    <div class="heroWrap" id="heroWrap"><img class="hero" id="hero" src="img/kevin_full.png" alt=""></div>
+    <div class="heroWrap" id="heroWrap"><img class="hero" id="hero" src="" alt=""></div>
     <div class="parts" id="parts"></div>
     <div class="vig"></div>
     <div class="top">
       <div class="ava" id="ava"></div>
-      <div class="idw"><span class="rk" id="rk">RANK 1</span>
-        <div class="nm" id="nm">钱钱</div><div class="ti" id="ti">💰 赌桌大亨</div></div>
+      <div class="idw"><span class="rk" id="rk"></span>
+        <div class="nm" id="nm"></div><div class="ti" id="ti"></div></div>
     </div>
     <div class="bot">
       <div class="stats" id="stats"></div>
@@ -104,13 +119,9 @@
       <div class="tiers" id="tiers"></div>
     </div>
   </div>
-  <div class="tabs">
-    <button class="tab on" id="t_kevin" onclick="show('kevin')">Kevin M</button>
-    <button class="tab" id="t_qian" onclick="show('qian')">钱钱</button>
-    <button class="tab" id="t_shuang" onclick="show('shuang')">爽哥</button>
-  </div>
+  <div class="roster" id="roster"><div class="rchip" id="r_lee" style="--rc:#C9CAD6" onclick="show('lee')"><div class="rava" style="background-image:url(img/lee_avatar.png)"></div><div class="rnm">Lee</div><div class="rrk">#1</div></div><div class="rchip" id="r_charlie" style="--rc:#2BB7A3" onclick="show('charlie')"><div class="rava" style="background-image:url(img/charlie_avatar.png)"></div><div class="rnm">Charlie</div><div class="rrk">#2</div></div><div class="rchip" id="r_kevinm" style="--rc:#A66BFF" onclick="show('kevinm')"><div class="rava" style="background-image:url(img/kevinm_avatar.png)"></div><div class="rnm">Kevin M</div><div class="rrk">#3</div></div><div class="rchip" id="r_moon" style="--rc:#6C7CE0" onclick="show('moon')"><div class="rava" style="background-image:url(img/moon_avatar.png)"></div><div class="rnm">Talktodamoon</div><div class="rrk">#4</div></div><div class="rchip" id="r_jeff" style="--rc:#F0B429" onclick="show('jeff')"><div class="rava" style="background-image:url(img/jeff_avatar.png)"></div><div class="rnm">Jeff</div><div class="rrk">#5</div></div><div class="rchip" id="r_tmobile" style="--rc:#E0218A" onclick="show('tmobile')"><div class="rava" style="background-image:url(img/tmobile_avatar.png)"></div><div class="rnm">T-Mobile</div><div class="rrk">#6</div></div><div class="rchip" id="r_adrian" style="--rc:#FF7A1A" onclick="show('adrian')"><div class="rava" style="background-image:url(img/adrian_avatar.png)"></div><div class="rnm">Adrian</div><div class="rrk">#7</div></div><div class="rchip" id="r_qianqian" style="--rc:#E8C24A" onclick="show('qianqian')"><div class="rava" style="background-image:url(img/qianqian_avatar.png)"></div><div class="rnm">钱钱</div><div class="rrk">#8</div></div><div class="rchip" id="r_sammy" style="--rc:#7AA8E0" onclick="show('sammy')"><div class="rava" style="background-image:url(img/sammy_avatar.png)"></div><div class="rnm">Sammy</div><div class="rrk">#9</div></div><div class="rchip" id="r_dangdang" style="--rc:#28C0C8" onclick="show('dangdang')"><div class="rava" style="background-image:url(img/dangdang_avatar.png)"></div><div class="rnm">Dangdang</div><div class="rrk">#10</div></div><div class="rchip" id="r_elsa" style="--rc:#F06292" onclick="show('elsa')"><div class="rava" style="background-image:url(img/elsa_avatar.png)"></div><div class="rnm">Elsa</div><div class="rrk">#11</div></div><div class="rchip" id="r_pp" style="--rc:#D4AF37" onclick="show('pp')"><div class="rava" style="background-image:url(img/pp_avatar.png)"></div><div class="rnm">PP</div><div class="rrk">#12</div></div><div class="rchip" id="r_raylin" style="--rc:#4CAF50" onclick="show('raylin')"><div class="rava" style="background-image:url(img/raylin_avatar.png)"></div><div class="rnm">Ray Lin</div><div class="rrk">#13</div></div><div class="rchip" id="r_shuangge" style="--rc:#45B0E0" onclick="show('shuangge')"><div class="rava" style="background-image:url(img/shuangge_avatar.png)"></div><div class="rnm">爽哥</div><div class="rrk">#14</div></div><div class="rchip" id="r_dahei" style="--rc:#5A6678" onclick="show('dahei')"><div class="rava" style="background-image:url(img/dahei_avatar.png)"></div><div class="rnm">大黑</div><div class="rrk">#16</div></div><div class="rchip" id="r_aye" style="--rc:#6FA06B" onclick="show('aye')"><div class="rava" style="background-image:url(img/aye_avatar.png)"></div><div class="rnm">阿业</div><div class="rrk">#17</div></div><div class="rchip" id="r_atnt" style="--rc:#2E8FE6" onclick="show('atnt')"><div class="rava" style="background-image:url(img/atnt_avatar.png)"></div><div class="rnm">AT&T</div><div class="rrk">#18</div></div><div class="rchip" id="r_coach" style="--rc:#3FA34D" onclick="show('coach')"><div class="rava" style="background-image:url(img/coach_avatar.png)"></div><div class="rnm">Coach</div><div class="rrk">#19</div></div><div class="rchip" id="r_ian" style="--rc:#FFC107" onclick="show('ian')"><div class="rava" style="background-image:url(img/ian_avatar.png)"></div><div class="rnm">Ian</div><div class="rrk">#20</div></div><div class="rchip" id="r_john" style="--rc:#E0533A" onclick="show('john')"><div class="rava" style="background-image:url(img/john_avatar.png)"></div><div class="rnm">John</div><div class="rrk">#21</div></div></div>
   <div class="dex" id="dex"></div>
-  <div class="hint">悬浮(电脑)看徽章名字与要求 · 点徽章放大 · 切换上方角色</div>
+  <div class="hint">点上方头像切换角色 · 悬浮(电脑)看徽章要求 · 点徽章放大</div>
 
   <div class="lb" id="lbx" onclick="closeLb()">
     <div class="lbc">
@@ -132,22 +143,10 @@ const NCAT = CATS.length;
 const RC = {common:'r-common', rare:'r-rare', legendary:'r-legendary'};
 const RL = {common:'○ 普通', rare:'◆ 稀有', legendary:'★ 传奇'};
 const TINFO = [['Tier 1','各类别 ≥1 枚'], ['Tier 2','各类别 ≥2 + 任意 3'], ['Tier 3','任意 30 枚']];
-
-const DATA = {
-  kevin: {name:'Kevin M', title:'🎯 冷静操盘手', rank:'RANK 8', theme:'#A66BFF',
-    hero:'img/kevin_full.png', ava:'img/kevin_avatar.png',
-    stats:{pts:6, coins:20, games:1}, badges:['red_glow']},
-  qian: {name:'钱钱', title:'💰 赌桌大亨', rank:'RANK 1', theme:'#FFC233',
-    hero:'img/qian_full.png', ava:'img/qian_avatar.png',
-    stats:{pts:128, coins:86, games:19},
-    badges:['centurion','legend_100','whale','red_glow','hh_12','mentor_3','march_55']},
-  shuang: {name:'爽哥', title:'🕶️ 老千之王', rank:'RANK 3', theme:'#25E0D0',
-    hero:'img/shuang_full.png', ava:'img/shuang_avatar.png',
-    stats:{pts:96, coins:64, games:15},
-    badges:['hh_12','koi_fh_12','iron_30','centurion']},
-};
+const DATA = {"lee": {"name": "Lee", "title": "🧴 白发香氛大亨", "rank": 1, "theme": "#C9CAD6", "hero": "img/lee_full.png", "ava": "img/lee_avatar.png", "stats": {"pts": 22, "coins": 23, "games": 2}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "22/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "2/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "2/100 场", "spree_5": "最长连续 2/5 场", "stubborn_5": "最长连续 2/5 场", "lavish_25k": "8000/25000 $ 单赛季买入", "capitalist": "8000/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "2/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "charlie": {"name": "Charlie", "title": "🎓 留学摆渡人", "rank": 2, "theme": "#2BB7A3", "hero": "img/charlie_full.png", "ava": "img/charlie_avatar.png", "stats": {"pts": 21, "coins": 12, "games": 2}, "badges": ["red_glow"], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "21/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "2/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "2/100 场", "spree_5": "最长连续 2/5 场", "stubborn_5": "最长连续 1/5 场", "lavish_25k": "5000/25000 $ 单赛季买入", "capitalist": "5000/300000 $ 生涯买入", "water_master_5": "最长连续 1/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "2/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "kevinm": {"name": "Kevin M", "title": "🎉 欢乐气氛之王", "rank": 3, "theme": "#A66BFF", "hero": "img/kevinm_full.png", "ava": "img/kevinm_avatar.png", "stats": {"pts": 20, "coins": 21, "games": 2}, "badges": ["red_glow"], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "20/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "2/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "2/100 场", "spree_5": "最长连续 1/5 场", "stubborn_5": "最长连续 1/5 场", "lavish_25k": "7000/25000 $ 单赛季买入", "capitalist": "7000/300000 $ 生涯买入", "water_master_5": "最长连续 1/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "2/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "moon": {"name": "Talktodamoon", "title": "🌙 月下冷面杀手", "rank": 4, "theme": "#6C7CE0", "hero": "img/moon_full.png", "ava": "img/moon_avatar.png", "stats": {"pts": 18, "coins": 17, "games": 2}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "18/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "2/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "2/100 场", "spree_5": "最长连续 2/5 场", "stubborn_5": "最长连续 2/5 场", "lavish_25k": "9000/25000 $ 单赛季买入", "capitalist": "9000/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "2/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "1/40 场前3到场"}}, "jeff": {"name": "Jeff", "title": "🎴 黝黑学霸二把手", "rank": 5, "theme": "#F0B429", "hero": "img/jeff_full.png", "ava": "img/jeff_avatar.png", "stats": {"pts": 13, "coins": 33, "games": 2}, "badges": ["phoenix"], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "13/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "2/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "2/100 场", "spree_5": "最长连续 1/5 场", "stubborn_5": "最长连续 0/5 场", "lavish_25k": "6000/25000 $ 单赛季买入", "capitalist": "6000/300000 $ 生涯买入", "water_master_5": "最长连续 2/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "2/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "tmobile": {"name": "T-Mobile", "title": "🐦‍🔥 凤凰大起大落", "rank": 6, "theme": "#E0218A", "hero": "img/tmobile_full.png", "ava": "img/tmobile_avatar.png", "stats": {"pts": 11, "coins": 19, "games": 1}, "badges": ["whale"], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "11/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "1/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "1/100 场", "spree_5": "最长连续 1/5 场", "stubborn_5": "最长连续 1/5 场", "lavish_25k": "10000/25000 $ 单赛季买入", "capitalist": "10000/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "1/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "1/40 场前3到场"}}, "adrian": {"name": "Adrian", "title": "🏀 情绪化篮球少年", "rank": 7, "theme": "#FF7A1A", "hero": "img/adrian_full.png", "ava": "img/adrian_avatar.png", "stats": {"pts": 10, "coins": 10, "games": 2}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "10/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "2/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "2/100 场", "spree_5": "最长连续 0/5 场", "stubborn_5": "最长连续 0/5 场", "lavish_25k": "2000/25000 $ 单赛季买入", "capitalist": "2000/300000 $ 生涯买入", "water_master_5": "最长连续 1/5 场", "hh_12": "0/12 HH", "koi_fh_12": "2/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "2/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "qianqian": {"name": "钱钱", "title": "🪙 戴帽老好人", "rank": 8, "theme": "#E8C24A", "hero": "img/qianqian_full.png", "ava": "img/qianqian_avatar.png", "stats": {"pts": 10, "coins": 10, "games": 1}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "10/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "1/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "1/100 场", "spree_5": "最长连续 1/5 场", "stubborn_5": "最长连续 1/5 场", "lavish_25k": "3000/25000 $ 单赛季买入", "capitalist": "3000/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "1/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "sammy": {"name": "Sammy", "title": "🕛 12点灰姑娘", "rank": 9, "theme": "#7AA8E0", "hero": "img/sammy_full.png", "ava": "img/sammy_avatar.png", "stats": {"pts": 8, "coins": 10, "games": 1}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "8/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "1/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "1/100 场", "spree_5": "最长连续 1/5 场", "stubborn_5": "最长连续 1/5 场", "lavish_25k": "3000/25000 $ 单赛季买入", "capitalist": "3000/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "1/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "dangdang": {"name": "Dangdang", "title": "⏱️ 准时绅士", "rank": 10, "theme": "#28C0C8", "hero": "img/dangdang_full.png", "ava": "img/dangdang_avatar.png", "stats": {"pts": 7, "coins": 13, "games": 1}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "7/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "1/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "1/100 场", "spree_5": "最长连续 0/5 场", "stubborn_5": "最长连续 0/5 场", "lavish_25k": "1000/25000 $ 单赛季买入", "capitalist": "1000/300000 $ 生涯买入", "water_master_5": "最长连续 1/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "1/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "1/40 场前3到场"}}, "elsa": {"name": "Elsa", "title": "🧋 奶茶大姐大", "rank": 11, "theme": "#F06292", "hero": "img/elsa_full.png", "ava": "img/elsa_avatar.png", "stats": {"pts": 7, "coins": 15, "games": 1}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "7/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "1/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "1/100 场", "spree_5": "最长连续 0/5 场", "stubborn_5": "最长连续 0/5 场", "lavish_25k": "1000/25000 $ 单赛季买入", "capitalist": "1000/300000 $ 生涯买入", "water_master_5": "最长连续 1/5 场", "hh_12": "1/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "1/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "1/40 场前3到场"}}, "pp": {"name": "PP", "title": "💎 花花公子富豪", "rank": 12, "theme": "#D4AF37", "hero": "img/pp_full.png", "ava": "img/pp_avatar.png", "stats": {"pts": 7, "coins": 10, "games": 1}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "7/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "1/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "1/100 场", "spree_5": "最长连续 1/5 场", "stubborn_5": "最长连续 1/5 场", "lavish_25k": "2500/25000 $ 单赛季买入", "capitalist": "2500/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "1/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "raylin": {"name": "Ray Lin", "title": "🤝 Social新朋友", "rank": 13, "theme": "#4CAF50", "hero": "img/raylin_full.png", "ava": "img/raylin_avatar.png", "stats": {"pts": 7, "coins": 10, "games": 1}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "7/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "1/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "1/100 场", "spree_5": "最长连续 0/5 场", "stubborn_5": "最长连续 1/5 场", "lavish_25k": "1400/25000 $ 单赛季买入", "capitalist": "1400/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "1/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "shuangge": {"name": "爽哥", "title": "⏰ 准点爽哥", "rank": 14, "theme": "#45B0E0", "hero": "img/shuangge_full.png", "ava": "img/shuangge_avatar.png", "stats": {"pts": 6, "coins": 18, "games": 1}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "6/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "1/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "1/100 场", "spree_5": "最长连续 0/5 场", "stubborn_5": "最长连续 0/5 场", "lavish_25k": "1000/25000 $ 单赛季买入", "capitalist": "1000/300000 $ 生涯买入", "water_master_5": "最长连续 1/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "1/20 场第1到场", "iron_30": "1/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "1/40 场前3到场"}}, "dahei": {"name": "大黑", "title": "🌑 黝黑大高个", "rank": 16, "theme": "#5A6678", "hero": "img/dahei_full.png", "ava": "img/dahei_avatar.png", "stats": {"pts": 3, "coins": 10, "games": 1}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "3/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "1/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "1/100 场", "spree_5": "最长连续 0/5 场", "stubborn_5": "最长连续 0/5 场", "lavish_25k": "1000/25000 $ 单赛季买入", "capitalist": "1000/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "1/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "aye": {"name": "阿业", "title": "🎯 紧手算计客", "rank": 17, "theme": "#6FA06B", "hero": "img/aye_full.png", "ava": "img/aye_avatar.png", "stats": {"pts": 3, "coins": 18, "games": 1}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "3/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "1/30 场", "founding_3seasons": "1/3 赛季", "shadow_10": "最长连续 1/10 周", "legend_100": "1/100 场", "spree_5": "最长连续 0/5 场", "stubborn_5": "最长连续 0/5 场", "lavish_25k": "1000/25000 $ 单赛季买入", "capitalist": "1000/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "1/20 场第1到场", "iron_30": "1/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "1/40 场前3到场"}}, "atnt": {"name": "AT&T", "title": "🤯 匪夷所思疯子", "rank": 18, "theme": "#2E8FE6", "hero": "img/atnt_full.png", "ava": "img/atnt_avatar.png", "stats": {"pts": 0, "coins": 20, "games": 0}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "0/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "0/30 场", "founding_3seasons": "0/3 赛季", "shadow_10": "最长连续 0/10 周", "legend_100": "0/100 场", "spree_5": "最长连续 0/5 场", "stubborn_5": "最长连续 0/5 场", "lavish_25k": "0/25000 $ 单赛季买入", "capitalist": "0/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "0/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "coach": {"name": "Coach", "title": "⛳ 奶茶高尔夫教练", "rank": 19, "theme": "#3FA34D", "hero": "img/coach_full.png", "ava": "img/coach_avatar.png", "stats": {"pts": 0, "coins": 20, "games": 0}, "badges": [], "prog": {"season_surge": "第 2 赛季起计算", "centurion": "0/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "0/30 场", "founding_3seasons": "0/3 赛季", "shadow_10": "最长连续 0/10 周", "legend_100": "0/100 场", "spree_5": "最长连续 0/5 场", "stubborn_5": "最长连续 0/5 场", "lavish_25k": "0/25000 $ 单赛季买入", "capitalist": "0/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "0/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "ian": {"name": "Ian", "title": "👑 控场VIP之王", "rank": 20, "theme": "#FFC107", "hero": "img/ian_full.png", "ava": "img/ian_avatar.png", "stats": {"pts": 0, "coins": 20, "games": 0}, "badges": [], "prog": {"season_surge": "需上赛季积分对比", "centurion": "0/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "0/30 场", "founding_3seasons": "0/3 赛季", "shadow_10": "最长连续 0/10 周", "legend_100": "0/100 场", "spree_5": "最长连续 0/5 场", "stubborn_5": "最长连续 0/5 场", "lavish_25k": "0/25000 $ 单赛季买入", "capitalist": "0/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "0/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}, "john": {"name": "John", "title": "🃏 胖高铁杆粉", "rank": 21, "theme": "#E0533A", "hero": "img/john_full.png", "ava": "img/john_avatar.png", "stats": {"pts": 0, "coins": 50, "games": 0}, "badges": [], "prog": {"season_surge": "需上赛季积分对比", "centurion": "0/100 赛季积分", "three_dynasties": "0/3 满勤赛季", "evergreen": "0/3 前12赛季", "rookie_30": "0/30 场", "founding_3seasons": "0/3 赛季", "shadow_10": "最长连续 0/10 周", "legend_100": "0/100 场", "spree_5": "最长连续 0/5 场", "stubborn_5": "最长连续 0/5 场", "lavish_25k": "0/25000 $ 单赛季买入", "capitalist": "0/300000 $ 生涯买入", "water_master_5": "最长连续 0/5 场", "hh_12": "0/12 HH", "koi_fh_12": "0/12 FH 抽中", "mentor_1": "0/1 位新人", "mentor_3": "0/3 位新人", "early_20": "0/20 场第1到场", "iron_30": "0/30 场收官", "march_55": "0/55 场 ≥8h", "punctual_40": "0/40 场前3到场"}}};
+const KEYS = ["lee", "charlie", "kevinm", "moon", "jeff", "tmobile", "adrian", "qianqian", "sammy", "dangdang", "elsa", "pp", "raylin", "shuangge", "dahei", "aye", "atnt", "coach", "ian", "john"];
 const $ = id => document.getElementById(id);
-let owned = new Set();
+let owned = new Set(), curProg = {};
 
 function tiers(set){
   const byCat = {}; CATS.forEach(c => byCat[c] = 0);
@@ -164,14 +163,13 @@ function tiers(set){
 }
 
 function show(k){
-  const d = DATA[k];
-  owned = new Set(d.badges);
+  const d = DATA[k]; owned = new Set(d.badges); curProg = d.prog || {};
   $('card').style.setProperty('--theme', d.theme);
   $('hero').src = d.hero;
   $('ava').style.backgroundImage = `url(${d.ava})`;
-  $('nm').textContent = d.name; $('ti').textContent = d.title; $('rk').textContent = d.rank;
+  $('nm').textContent = d.name; $('ti').textContent = d.title; $('rk').textContent = 'RANK ' + d.rank;
   $('stats').innerHTML =
-    `<div class="stat p"><b>${d.stats.pts}</b><span>赛季积分</span></div>`+
+    `<div class="stat p"><b>${d.stats.pts}</b><span>本赛季积分</span></div>`+
     `<div class="stat c"><b>${d.stats.coins}</b><span>🪙 金币</span></div>`+
     `<div class="stat"><b>${d.stats.games}</b><span>出席场次</span></div>`;
   $('bc').textContent = owned.size + ' / 35 枚';
@@ -182,7 +180,6 @@ function show(k){
       `<div class="tbar"><i style="width:${Math.round(t.pct*100)}%"></i></div></div>`+
       `<div class="tval">${t.done ? '✓ 已达成' : '还差 ' + t.rem + ' ' + t.unit}</div>`+
     `</div>`).join('');
-  // 徽章图鉴 — all 35 grouped by category
   let html = '';
   CATS.forEach(c => {
     const items = BADGES.filter(b => b.cat === c);
@@ -196,7 +193,8 @@ function show(k){
       }).join('') + `</div></div>`;
   });
   $('dex').innerHTML = html;
-  ['kevin','qian','shuang'].forEach(x => $('t_'+x).classList.toggle('on', x===k));
+  KEYS.forEach(x => $('r_'+x).classList.toggle('on', x===k));
+  const rc = $('r_'+k); if (rc) rc.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
 }
 
 function openLb(id){
@@ -208,7 +206,7 @@ function openLb(id){
   $('lbd').textContent = b.desc;
   const s = $('lbs');
   if (lit) { s.className = 'lbs done'; s.textContent = '✓ 已获得'; }
-  else { s.className = 'lbs lock'; s.textContent = '🔒 未解锁 · ' + b.desc; }
+  else { s.className = 'lbs lock'; s.textContent = curProg[id] ? ('🔒 进度 ' + curProg[id]) : '🔒 未解锁'; }
   $('lbx').classList.add('open');
 }
 function closeLb(){ $('lbx').classList.remove('open'); }
@@ -225,6 +223,6 @@ card.addEventListener('pointermove', e=>{ const r=card.getBoundingClientRect();
 card.addEventListener('pointerleave', ()=>px(0,0));
 window.addEventListener('deviceorientation', e=>{
   if(e.gamma==null) return; px(Math.max(-.5,Math.min(.5,e.gamma/45)), Math.max(-.5,Math.min(.5,(e.beta-40)/45))); });
-show('kevin');
+show(KEYS[0]);
 </script>
 </body></html>
