@@ -8,7 +8,7 @@
   body{background:radial-gradient(120% 80% at 50% 0%,#15161c,#070709 70%);color:#fff;
     font-family:-apple-system,"PingFang SC",system-ui,sans-serif;min-height:100vh;
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:14px}
-  .card{position:relative;width:min(380px,92vw);aspect-ratio:38/68;border-radius:24px;overflow:hidden;
+  .card{position:relative;width:min(380px,92vw);aspect-ratio:38/70;border-radius:24px;overflow:hidden;
     background:#0a0a0c;border:1px solid color-mix(in srgb,var(--theme) 55%,#333);
     box-shadow:0 0 0 1px rgba(0,0,0,.6),0 26px 60px rgba(0,0,0,.7);
     animation:glow 4.5s ease-in-out infinite;perspective:900px;cursor:pointer;
@@ -16,15 +16,15 @@
   @keyframes glow{0%,100%{box-shadow:0 0 34px -10px var(--theme),0 26px 60px rgba(0,0,0,.7)}
     50%{box-shadow:0 0 64px -6px var(--theme),0 26px 60px rgba(0,0,0,.7)}}
   .heroWrap{position:absolute;inset:-6% -6% -6% -6%;z-index:1;will-change:transform;transition:transform .12s ease-out}
-  .hero{width:100%;height:100%;object-fit:cover;object-position:50% 18%;animation:breathe 6s ease-in-out infinite;display:block}
+  .hero{width:100%;height:100%;object-fit:cover;object-position:50% 14%;animation:breathe 6s ease-in-out infinite;display:block}
   @keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-12px) scale(1.022)}}
   .parts{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
   .parts i{position:absolute;bottom:-12px;width:6px;height:6px;border-radius:50%;
     background:var(--theme);filter:blur(.4px);opacity:0;animation:drift linear infinite}
   @keyframes drift{0%{transform:translateY(0);opacity:0}12%{opacity:.85}100%{transform:translateY(-118%);opacity:0}}
   .vig{position:absolute;inset:0;z-index:3;pointer-events:none;
-    background:linear-gradient(180deg,rgba(4,4,6,.82) 0%,rgba(4,4,6,.15) 24%,
-      rgba(4,4,6,0) 46%,rgba(4,4,6,.55) 70%,rgba(4,4,6,.94) 100%)}
+    background:linear-gradient(180deg,rgba(4,4,6,.82) 0%,rgba(4,4,6,.12) 20%,
+      rgba(4,4,6,0) 38%,rgba(4,4,6,.6) 62%,rgba(4,4,6,.95) 100%)}
   .top{position:absolute;top:0;left:0;right:0;z-index:4;padding:16px 16px 0;display:flex;gap:12px;align-items:center}
   .ava{width:58px;height:58px;border-radius:50%;flex:none;background-size:cover;background-position:center 12%;
     border:2px solid var(--theme);box-shadow:0 0 16px -2px var(--theme),inset 0 0 0 2px rgba(0,0,0,.4)}
@@ -33,27 +33,28 @@
     color:#1a1400;background:linear-gradient(135deg,#FFE070,var(--theme));box-shadow:0 2px 6px rgba(0,0,0,.4)}
   .nm{font-size:25px;font-weight:900;line-height:1.1;margin-top:3px;text-shadow:0 2px 10px rgba(0,0,0,.8)}
   .ti{font-size:13px;font-weight:700;color:var(--theme);text-shadow:0 1px 6px rgba(0,0,0,.9);margin-top:1px}
-  .bot{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:0 14px 16px}
-  .stats{display:flex;gap:8px;margin-bottom:12px}
+  .bot{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:0 14px 14px}
+  .stats{display:flex;gap:8px;margin-bottom:11px}
   .stat{flex:1;background:rgba(12,12,16,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-    border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:8px 4px;text-align:center}
-  .stat b{display:block;font-size:19px;font-weight:900;line-height:1}
+    border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:7px 4px;text-align:center}
+  .stat b{display:block;font-size:18px;font-weight:900;line-height:1}
   .stat span{font-size:10px;color:#aaa;margin-top:3px;display:block}
   .stat.p b{color:#34c759}.stat.c b{color:#FFC700}
   .lab{font-size:11.5px;font-weight:700;color:#cfcfd6;margin:0 2px 6px;display:flex;align-items:center;gap:6px}
-  .lab span{color:var(--theme)}
-  .wall{display:flex;gap:7px;margin-bottom:12px}
-  .wall img{width:46px;height:46px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6)) drop-shadow(0 0 6px color-mix(in srgb,var(--theme) 60%,transparent));
-    transition:transform .14s ease}
-  .wall img:active{transform:scale(.9)}
-  .items{display:flex;gap:7px}
-  .slot{flex:1;aspect-ratio:1;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-    background:rgba(14,14,18,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-    border:1px solid color-mix(in srgb,var(--theme) 40%,rgba(255,255,255,.1));
-    box-shadow:inset 0 0 14px -8px var(--theme)}
-  .slot .e{font-size:21px;line-height:1}
-  .slot .n{font-size:8.5px;color:#bbb}
-  .slot.empty{opacity:.32;border-style:dashed}
+  .lab span{color:var(--theme)} .lab .ct{margin-left:auto;color:#888;font-weight:800}
+  .wall{display:flex;gap:6px;margin-bottom:11px}
+  .wall img{width:40px;height:40px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6)) drop-shadow(0 0 6px color-mix(in srgb,var(--theme) 60%,transparent))}
+  .tiers{display:flex;flex-direction:column;gap:6px}
+  .tier{display:flex;align-items:center;gap:9px;background:rgba(14,14,18,.6);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:6px 11px}
+  .tier .tn{font-size:12px;font-weight:900;width:46px;flex:none}
+  .tier .tmid{flex:1;min-width:0}
+  .tier .treq{font-size:9px;color:#8c8c92;margin-bottom:3px}
+  .tier .tbar{height:5px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden}
+  .tier .tbar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#FFE070,var(--theme))}
+  .tier .tval{font-size:11px;font-weight:800;flex:none;width:64px;text-align:right;color:var(--theme)}
+  .tier.done .tval{color:#34c759} .tier.done .tbar i{background:#34c759}
   .tabs{display:flex;gap:10px}
   .tab{padding:8px 15px;border-radius:11px;border:1px solid #2a2a30;background:#16161b;color:#bbb;
     font-size:13.5px;font-weight:800;cursor:pointer}
@@ -72,10 +73,10 @@
     </div>
     <div class="bot">
       <div class="stats" id="stats"></div>
-      <div class="lab"><span>🏆</span> 徽章墙 <span id="bc" style="margin-left:auto;color:#888"></span></div>
+      <div class="lab"><span>🏆</span> 徽章墙 <span class="ct" id="bc"></span></div>
       <div class="wall" id="wall"></div>
-      <div class="lab"><span>🎒</span> 道具 · 装备</div>
-      <div class="items" id="items"></div>
+      <div class="lab"><span>🎖️</span> 段位进度</div>
+      <div class="tiers" id="tiers"></div>
     </div>
   </div>
   <div class="tabs">
@@ -86,24 +87,44 @@
   <div class="hint">点标签切换角色 · 移动鼠标 / 倾斜手机 看视差</div>
 
 <script>
+const CATS = ["season","attendance","economy","skill","luck","social","endurance"];
+const CAT_OF = {"season_surge":"season","centurion":"season","top3":"season","three_dynasties":"season","evergreen":"season","rookie_30":"attendance","founding_3seasons":"attendance","shadow_10":"attendance","legend_100":"attendance","spree_5":"economy","stubborn_5":"economy","whale":"economy","lavish_25k":"economy","capitalist":"economy","red_glow":"skill","phoenix":"skill","water_master_5":"skill","pot_master":"skill","bad_beat":"skill","full_house_3":"luck","hh_12":"luck","pocket_quads":"luck","koi_fh_12":"luck","straight_flush":"luck","triple_threat":"luck","mentor_1":"social","mentor_3":"social","mentor_2seasons":"social","mentor_eye":"social","mentor_network":"social","early_20":"endurance","iron_30":"endurance","march_55":"endurance","punctual_40":"endurance","iron_triple":"endurance"};
+const NCAT = CATS.length;            // 7
+const TINFO = [['Tier 1','各类别 ≥1 枚'], ['Tier 2','各类别 ≥2 + 任意 3'], ['Tier 3','任意 30 枚']];
+
 const DATA = {
   kevin: {name:'Kevin M', title:'🎯 冷静操盘手', rank:'RANK 8', theme:'#A66BFF',
     hero:'img/kevin_full.png', ava:'img/kevin_avatar.png',
     stats:{pts:6, coins:20, games:1},
-    badges:['red_glow'],
-    items:[['🥃','威士忌'],['♠️','黑桃A'],['🎯','准星'],null,null]},
+    badges:['red_glow']},
   qian: {name:'钱钱', title:'💰 赌桌大亨', rank:'RANK 1', theme:'#FFC233',
     hero:'img/qian_full.png', ava:'img/qian_avatar.png',
     stats:{pts:128, coins:86, games:19},
-    badges:['whale','capitalist','centurion','legend_100','march_55'],
-    items:[['🕶️','墨镜'],['🥃','威士忌'],['💼','金箱'],['🃏','王牌'],['💎','钻戒']]},
+    badges:['centurion','legend_100','whale','red_glow','hh_12','mentor_3','march_55']},
   shuang: {name:'爽哥', title:'🕶️ 老千之王', rank:'RANK 3', theme:'#25E0D0',
     hero:'img/shuang_full.png', ava:'img/shuang_avatar.png',
     stats:{pts:96, coins:64, games:15},
-    badges:['hh_12','koi_fh_12','iron_30','centurion'],
-    items:[['🕶️','墨镜'],['⚡','闪电'],['🎧','节奏'],['♠️','黑桃A'],null]},
+    badges:['hh_12','koi_fh_12','iron_30','centurion']},
 };
 const $ = id => document.getElementById(id);
+
+function tiers(badges){
+  const byCat = {}; CATS.forEach(c => byCat[c] = 0);
+  badges.forEach(b => { const c = CAT_OF[b]; if (c) byCat[c]++; });
+  const total = badges.length;
+  // Tier 1 — ≥1 badge in every category
+  const covered = CATS.filter(c => byCat[c] >= 1).length;
+  const t1 = {done: covered >= NCAT, pct: covered / NCAT, rem: NCAT - covered, unit: '类'};
+  // Tier 2 — ≥2 in every category PLUS any 3 more (= 2·N + 3, with the per-cat cap)
+  const base2 = CATS.reduce((s, c) => s + Math.min(byCat[c], 2), 0);  // 0..14
+  const t2done = base2 + Math.min(Math.max(0, total - base2), 3);     // 0..17
+  const need2 = 2 * NCAT + 3;                                         // 17
+  const t2 = {done: t2done >= need2, pct: t2done / need2, rem: need2 - t2done, unit: '枚'};
+  // Tier 3 — any 30 badges
+  const t3 = {done: total >= 30, pct: Math.min(total, 30) / 30, rem: Math.max(0, 30 - total), unit: '枚'};
+  return [t1, t2, t3];
+}
+
 function show(k){
   const d = DATA[k];
   $('card').style.setProperty('--theme', d.theme);
@@ -114,11 +135,15 @@ function show(k){
     `<div class="stat p"><b>${d.stats.pts}</b><span>赛季积分</span></div>`+
     `<div class="stat c"><b>${d.stats.coins}</b><span>🪙 金币</span></div>`+
     `<div class="stat"><b>${d.stats.games}</b><span>出席场次</span></div>`;
-  $('bc').textContent = d.badges.length + ' / 35';
+  $('bc').textContent = d.badges.length + ' / 35 枚';
   $('wall').innerHTML = d.badges.map(b => `<img src="badges/${b}.png" alt="">`).join('');
-  $('items').innerHTML = d.items.map(it => it
-    ? `<div class="slot"><div class="e">${it[0]}</div><div class="n">${it[1]}</div></div>`
-    : `<div class="slot empty"><div class="e">＋</div></div>`).join('');
+  $('tiers').innerHTML = tiers(d.badges).map((t, i) =>
+    `<div class="tier${t.done ? ' done' : ''}">`+
+      `<div class="tn">${TINFO[i][0]}</div>`+
+      `<div class="tmid"><div class="treq">${TINFO[i][1]}</div>`+
+      `<div class="tbar"><i style="width:${Math.round(t.pct*100)}%"></i></div></div>`+
+      `<div class="tval">${t.done ? '✓ 已达成' : '还差 ' + t.rem + ' ' + t.unit}</div>`+
+    `</div>`).join('');
   ['kevin','qian','shuang'].forEach(x => $('t_'+x).classList.toggle('on', x===k));
 }
 // floating particles
