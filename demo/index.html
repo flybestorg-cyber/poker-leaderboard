@@ -5,26 +5,25 @@
 <title>角色卡 Demo · 德州荣耀</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:radial-gradient(120% 80% at 50% 0%,#15161c,#070709 70%);color:#fff;
+  body{background:radial-gradient(120% 60% at 50% 0%,#15161c,#070709 60%);color:#fff;
     font-family:-apple-system,"PingFang SC",system-ui,sans-serif;min-height:100vh;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:14px}
-  .card{position:relative;width:min(380px,92vw);aspect-ratio:38/70;border-radius:24px;overflow:hidden;
-    background:#0a0a0c;border:1px solid color-mix(in srgb,var(--theme) 55%,#333);
+    display:flex;flex-direction:column;align-items:center;gap:12px;padding:14px 14px 48px}
+  .card{position:relative;width:min(380px,92vw);aspect-ratio:38/56;border-radius:24px;overflow:hidden;
+    background:#0a0a0c;border:1px solid color-mix(in srgb,var(--theme) 55%,#333);flex:none;
     box-shadow:0 0 0 1px rgba(0,0,0,.6),0 26px 60px rgba(0,0,0,.7);
-    animation:glow 4.5s ease-in-out infinite;perspective:900px;cursor:pointer;
-    -webkit-tap-highlight-color:transparent}
+    animation:glow 4.5s ease-in-out infinite;perspective:900px;-webkit-tap-highlight-color:transparent}
   @keyframes glow{0%,100%{box-shadow:0 0 34px -10px var(--theme),0 26px 60px rgba(0,0,0,.7)}
-    50%{box-shadow:0 0 64px -6px var(--theme),0 26px 60px rgba(0,0,0,.7)}}
+    50%{box-shadow:0 0 60px -6px var(--theme),0 26px 60px rgba(0,0,0,.7)}}
   .heroWrap{position:absolute;inset:-6% -6% -6% -6%;z-index:1;will-change:transform;transition:transform .12s ease-out}
-  .hero{width:100%;height:100%;object-fit:cover;object-position:50% 14%;animation:breathe 6s ease-in-out infinite;display:block}
+  .hero{width:100%;height:100%;object-fit:cover;object-position:50% 12%;animation:breathe 6s ease-in-out infinite;display:block}
   @keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-12px) scale(1.022)}}
   .parts{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
   .parts i{position:absolute;bottom:-12px;width:6px;height:6px;border-radius:50%;
     background:var(--theme);filter:blur(.4px);opacity:0;animation:drift linear infinite}
   @keyframes drift{0%{transform:translateY(0);opacity:0}12%{opacity:.85}100%{transform:translateY(-118%);opacity:0}}
   .vig{position:absolute;inset:0;z-index:3;pointer-events:none;
-    background:linear-gradient(180deg,rgba(4,4,6,.82) 0%,rgba(4,4,6,.12) 20%,
-      rgba(4,4,6,0) 38%,rgba(4,4,6,.6) 62%,rgba(4,4,6,.95) 100%)}
+    background:linear-gradient(180deg,rgba(4,4,6,.82) 0%,rgba(4,4,6,.1) 22%,
+      rgba(4,4,6,0) 42%,rgba(4,4,6,.62) 66%,rgba(4,4,6,.95) 100%)}
   .top{position:absolute;top:0;left:0;right:0;z-index:4;padding:16px 16px 0;display:flex;gap:12px;align-items:center}
   .ava{width:58px;height:58px;border-radius:50%;flex:none;background-size:cover;background-position:center 12%;
     border:2px solid var(--theme);box-shadow:0 0 16px -2px var(--theme),inset 0 0 0 2px rgba(0,0,0,.4)}
@@ -40,10 +39,8 @@
   .stat b{display:block;font-size:18px;font-weight:900;line-height:1}
   .stat span{font-size:10px;color:#aaa;margin-top:3px;display:block}
   .stat.p b{color:#34c759}.stat.c b{color:#FFC700}
-  .lab{font-size:11.5px;font-weight:700;color:#cfcfd6;margin:0 2px 6px;display:flex;align-items:center;gap:6px}
-  .lab span{color:var(--theme)} .lab .ct{margin-left:auto;color:#888;font-weight:800}
-  .wall{display:flex;gap:6px;margin-bottom:11px}
-  .wall img{width:40px;height:40px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6)) drop-shadow(0 0 6px color-mix(in srgb,var(--theme) 60%,transparent))}
+  .lab{font-size:11.5px;font-weight:700;color:#cfcfd6;margin:0 2px 7px;display:flex;align-items:center;gap:6px}
+  .lab span.e{color:var(--theme)} .lab .ct{margin-left:auto;color:#888;font-weight:800}
   .tiers{display:flex;flex-direction:column;gap:6px}
   .tier{display:flex;align-items:center;gap:9px;background:rgba(14,14,18,.6);
     backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
@@ -55,11 +52,41 @@
   .tier .tbar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#FFE070,var(--theme))}
   .tier .tval{font-size:11px;font-weight:800;flex:none;width:64px;text-align:right;color:var(--theme)}
   .tier.done .tval{color:#34c759} .tier.done .tbar i{background:#34c759}
-  .tabs{display:flex;gap:10px}
+  .tabs{display:flex;gap:10px;flex:none}
   .tab{padding:8px 15px;border-radius:11px;border:1px solid #2a2a30;background:#16161b;color:#bbb;
     font-size:13.5px;font-weight:800;cursor:pointer}
   .tab.on{color:#1a1400;background:linear-gradient(135deg,#FFE070,var(--theme));border-color:transparent}
-  .hint{font-size:11px;color:#666}
+  /* 徽章图鉴 — all 35 grouped by category */
+  .dex{width:min(380px,92vw);flex:none}
+  .dexcat{margin-bottom:6px}
+  .dexhead{font-size:12.5px;font-weight:800;margin:10px 2px 8px;display:flex;align-items:center;gap:6px;
+    border-bottom:1px solid #232328;padding-bottom:6px}
+  .dexhead.has{color:#ededf2} .dexhead.none{color:#5c5c62}
+  .dexhead .c{margin-left:auto;font-size:11px;color:#8a8a90;font-weight:700}
+  .dexgrid{display:flex;flex-wrap:wrap;gap:9px;padding:2px}
+  .dexb{width:48px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .dexb img{width:48px;height:48px;display:block;transition:transform .12s ease;
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}
+  .dexb.lit img{filter:drop-shadow(0 2px 3px rgba(0,0,0,.6)) drop-shadow(0 0 6px color-mix(in srgb,var(--theme) 55%,transparent))}
+  .dexb.lock img{filter:grayscale(1) brightness(.45);opacity:.5}
+  .dexb:active img{transform:scale(.88)}
+  .hint{font-size:11px;color:#666;flex:none;text-align:center}
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.86);display:none;
+    align-items:center;justify-content:center;padding:28px;-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px)}
+  .lb.open{display:flex}
+  .lbc{max-width:340px;width:100%;text-align:center}
+  .lb img{width:66vw;max-width:280px;height:auto;filter:drop-shadow(0 12px 28px rgba(0,0,0,.8));animation:pop .24s ease}
+  .lb img.lock{filter:grayscale(1) brightness(.5) drop-shadow(0 12px 28px rgba(0,0,0,.8))}
+  @keyframes pop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+  .lbn{font-size:23px;font-weight:800;margin-top:16px}
+  .lbd{color:#a8a8ae;font-size:14px;margin-top:11px;line-height:1.55;padding:0 8px}
+  .lbs{margin-top:13px;font-size:15px;font-weight:800}
+  .lbs.done{color:#34c759}.lbs.lock{color:#FFC700}
+  .chip{display:inline-block;font-size:11px;border-radius:6px;padding:2px 9px;font-weight:700;margin-top:8px}
+  .r-common{background:rgba(192,192,197,.18);color:#c8c8cd}.r-rare{background:rgba(90,200,250,.18);color:#5ac8fa}
+  .r-legendary{background:rgba(255,199,0,.18);color:#FFC700}
+  .lbh{color:#666;font-size:12px;margin-top:18px}
 </style></head>
 <body>
   <div class="card" id="card" style="--theme:#A66BFF">
@@ -73,9 +100,7 @@
     </div>
     <div class="bot">
       <div class="stats" id="stats"></div>
-      <div class="lab"><span>🏆</span> 徽章墙 <span class="ct" id="bc"></span></div>
-      <div class="wall" id="wall"></div>
-      <div class="lab"><span>🎖️</span> 段位进度</div>
+      <div class="lab"><span class="e">🎖️</span> 段位进度 <span class="ct" id="bc"></span></div>
       <div class="tiers" id="tiers"></div>
     </div>
   </div>
@@ -84,19 +109,34 @@
     <button class="tab" id="t_qian" onclick="show('qian')">钱钱</button>
     <button class="tab" id="t_shuang" onclick="show('shuang')">爽哥</button>
   </div>
-  <div class="hint">点标签切换角色 · 移动鼠标 / 倾斜手机 看视差</div>
+  <div class="dex" id="dex"></div>
+  <div class="hint">悬浮(电脑)看徽章名字与要求 · 点徽章放大 · 切换上方角色</div>
+
+  <div class="lb" id="lbx" onclick="closeLb()">
+    <div class="lbc">
+      <img id="lbimg" src="" alt="">
+      <div class="lbn" id="lbn"></div>
+      <div><span class="chip" id="lbr"></span></div>
+      <div class="lbd" id="lbd"></div>
+      <div class="lbs" id="lbs"></div>
+      <div class="lbh">点击任意处关闭</div>
+    </div>
+  </div>
 
 <script>
-const CATS = ["season","attendance","economy","skill","luck","social","endurance"];
-const CAT_OF = {"season_surge":"season","centurion":"season","top3":"season","three_dynasties":"season","evergreen":"season","rookie_30":"attendance","founding_3seasons":"attendance","shadow_10":"attendance","legend_100":"attendance","spree_5":"economy","stubborn_5":"economy","whale":"economy","lavish_25k":"economy","capitalist":"economy","red_glow":"skill","phoenix":"skill","water_master_5":"skill","pot_master":"skill","bad_beat":"skill","full_house_3":"luck","hh_12":"luck","pocket_quads":"luck","koi_fh_12":"luck","straight_flush":"luck","triple_threat":"luck","mentor_1":"social","mentor_3":"social","mentor_2seasons":"social","mentor_eye":"social","mentor_network":"social","early_20":"endurance","iron_30":"endurance","march_55":"endurance","punctual_40":"endurance","iron_triple":"endurance"};
-const NCAT = CATS.length;            // 7
+const CAT = {"cats": ["season", "attendance", "economy", "skill", "luck", "social", "endurance"], "labels": {"season": "🏆 赛季成就", "attendance": "📅 出席成就", "economy": "💰 经济成就", "skill": "⚡ 技术成就", "luck": "🎲 牌技运气", "social": "🤝 社交成就", "endurance": "🚂 耐力成就"}, "badges": [{"id": "season_surge", "name": "异军突起", "desc": "单赛季积分较上一赛季提升 ≥ 30 分", "rarity": "common", "cat": "season"}, {"id": "centurion", "name": "百分客", "desc": "单赛季积分 ≥ 100", "rarity": "rare", "cat": "season"}, {"id": "top3", "name": "三分天下", "desc": "单赛季进入积分榜前 3", "rarity": "rare", "cat": "season"}, {"id": "three_dynasties", "name": "三朝常客", "desc": "累计 3 个赛季，每季出席 ≥ 8 场", "rarity": "rare", "cat": "season"}, {"id": "evergreen", "name": "常青树", "desc": "累计 3 个赛季进入积分榜前 12", "rarity": "legendary", "cat": "season"}, {"id": "rookie_30", "name": "初露锋芒", "desc": "累计出席 30 场", "rarity": "common", "cat": "attendance"}, {"id": "founding_3seasons", "name": "开国元勋", "desc": "参与过 3 个赛季", "rarity": "common", "cat": "attendance"}, {"id": "shadow_10", "name": "如影随形", "desc": "连续 10 周出席 (每周 ≥1 场，每场 ≥ 3h)", "rarity": "rare", "cat": "attendance"}, {"id": "legend_100", "name": "百战不殆", "desc": "累计出席 100 场", "rarity": "legendary", "cat": "attendance"}, {"id": "spree_5", "name": "五连豪掷", "desc": "连续 5 场买入 ≥ $2,000", "rarity": "rare", "cat": "economy"}, {"id": "stubborn_5", "name": "倔强五连", "desc": "连续 5 场净亏 (每场 ≥ 3h)", "rarity": "rare", "cat": "economy"}, {"id": "whale", "name": "巨鲸", "desc": "单场买入 ≥ $10,000 (每场可获得)", "rarity": "rare", "cat": "economy"}, {"id": "lavish_25k", "name": "挥金如土", "desc": "单赛季累计买入 ≥ $25,000 (可重复)", "rarity": "rare", "cat": "economy"}, {"id": "capitalist", "name": "资本家", "desc": "生涯累计买入 ≥ $300,000", "rarity": "legendary", "cat": "economy"}, {"id": "red_glow", "name": "红光满面", "desc": "单场净赢 ≥ $3,000", "rarity": "common", "cat": "skill"}, {"id": "phoenix", "name": "凤凰涅槃", "desc": "单场买入 ≥ $5,000 且最终盈利 (每场可获得)", "rarity": "rare", "cat": "skill"}, {"id": "water_master_5", "name": "水上达人", "desc": "连续 5 场净赢 (每场 ≥ 4h)", "rarity": "rare", "cat": "skill"}, {"id": "pot_master", "name": "巨锅之主", "desc": "单手赢下底池 ≥ $4,000 (管理员手动颁发)", "rarity": "rare", "cat": "skill"}, {"id": "bad_beat", "name": "苍天有道", "desc": "持 full house 以上大牌却输掉该手 bad beat (管理员手动颁发)", "rarity": "rare", "cat": "skill"}, {"id": "full_house_3", "name": "葫芦娃", "desc": "单场打出 3 个 full house (管理员手动颁发)", "rarity": "common", "cat": "luck"}, {"id": "hh_12", "name": "百步穿杨", "desc": "累计打出 HH 12 次", "rarity": "rare", "cat": "luck"}, {"id": "pocket_quads", "name": "暗藏杀机", "desc": "用口袋对子(暗对)击中四条 (管理员手动颁发)", "rarity": "rare", "cat": "luck"}, {"id": "koi_fh_12", "name": "锦囊妙计", "desc": "累计 FH 抽中 12 次", "rarity": "legendary", "cat": "luck"}, {"id": "straight_flush", "name": "非我莫属", "desc": "单场打出 Straight Flush (管理员手动颁发)", "rarity": "legendary", "cat": "luck"}, {"id": "triple_threat", "name": "三神合体", "desc": "单场同时: HH + FH抽奖 + 净赢 ≥ $2,000 (每场可获得)", "rarity": "legendary", "cat": "luck"}, {"id": "mentor_1", "name": "引路人", "desc": "成功推荐 1 位新人 (该人 ≥ 3 场满 3h)", "rarity": "common", "cat": "social"}, {"id": "mentor_3", "name": "引路大师", "desc": "成功推荐 3 位新人 (每人 ≥ 3 场满 3h)", "rarity": "rare", "cat": "social"}, {"id": "mentor_2seasons", "name": "桃园结义", "desc": "连续 2 个赛季都成功推荐新人 (管理员手动颁发)", "rarity": "rare", "cat": "social"}, {"id": "mentor_eye", "name": "慧眼识英", "desc": "推荐的新人 ≥ 1 位进入单赛季积分榜前 3 (管理员手动颁发)", "rarity": "legendary", "cat": "social"}, {"id": "mentor_network", "name": "人脉之王", "desc": "二级推荐: 你带的新人也成功带新人 (管理员手动颁发)", "rarity": "legendary", "cat": "social"}, {"id": "early_20", "name": "闻鸡起舞", "desc": "累计 20 场第 1 位到场", "rarity": "common", "cat": "endurance"}, {"id": "iron_30", "name": "铁打不动", "desc": "累计 30 场打到收官 (2:00)", "rarity": "common", "cat": "endurance"}, {"id": "march_55", "name": "千场长征", "desc": "累计单场 ≥ 8h 满 55 次", "rarity": "rare", "cat": "endurance"}, {"id": "punctual_40", "name": "守时之王", "desc": "累计 40 场前 3 位到场", "rarity": "legendary", "cat": "endurance"}, {"id": "iron_triple", "name": "铁人三项", "desc": "单场 10h+ 且买入 ≥ $5,000 且前 3 位到场 (每场可获得)", "rarity": "legendary", "cat": "endurance"}]};
+const CATS = CAT.cats, LABELS = CAT.labels;
+const BADGES = CAT.badges;
+const BY_ID = {}; BADGES.forEach(b => BY_ID[b.id] = b);
+const NCAT = CATS.length;
+const RC = {common:'r-common', rare:'r-rare', legendary:'r-legendary'};
+const RL = {common:'○ 普通', rare:'◆ 稀有', legendary:'★ 传奇'};
 const TINFO = [['Tier 1','各类别 ≥1 枚'], ['Tier 2','各类别 ≥2 + 任意 3'], ['Tier 3','任意 30 枚']];
 
 const DATA = {
   kevin: {name:'Kevin M', title:'🎯 冷静操盘手', rank:'RANK 8', theme:'#A66BFF',
     hero:'img/kevin_full.png', ava:'img/kevin_avatar.png',
-    stats:{pts:6, coins:20, games:1},
-    badges:['red_glow']},
+    stats:{pts:6, coins:20, games:1}, badges:['red_glow']},
   qian: {name:'钱钱', title:'💰 赌桌大亨', rank:'RANK 1', theme:'#FFC233',
     hero:'img/qian_full.png', ava:'img/qian_avatar.png',
     stats:{pts:128, coins:86, games:19},
@@ -107,26 +147,25 @@ const DATA = {
     badges:['hh_12','koi_fh_12','iron_30','centurion']},
 };
 const $ = id => document.getElementById(id);
+let owned = new Set();
 
-function tiers(badges){
+function tiers(set){
   const byCat = {}; CATS.forEach(c => byCat[c] = 0);
-  badges.forEach(b => { const c = CAT_OF[b]; if (c) byCat[c]++; });
-  const total = badges.length;
-  // Tier 1 — ≥1 badge in every category
+  BADGES.forEach(b => { if (set.has(b.id)) byCat[b.cat]++; });
+  const total = set.size;
   const covered = CATS.filter(c => byCat[c] >= 1).length;
   const t1 = {done: covered >= NCAT, pct: covered / NCAT, rem: NCAT - covered, unit: '类'};
-  // Tier 2 — ≥2 in every category PLUS any 3 more (= 2·N + 3, with the per-cat cap)
-  const base2 = CATS.reduce((s, c) => s + Math.min(byCat[c], 2), 0);  // 0..14
-  const t2done = base2 + Math.min(Math.max(0, total - base2), 3);     // 0..17
-  const need2 = 2 * NCAT + 3;                                         // 17
+  const base2 = CATS.reduce((s, c) => s + Math.min(byCat[c], 2), 0);
+  const t2done = base2 + Math.min(Math.max(0, total - base2), 3);
+  const need2 = 2 * NCAT + 3;
   const t2 = {done: t2done >= need2, pct: t2done / need2, rem: need2 - t2done, unit: '枚'};
-  // Tier 3 — any 30 badges
   const t3 = {done: total >= 30, pct: Math.min(total, 30) / 30, rem: Math.max(0, 30 - total), unit: '枚'};
   return [t1, t2, t3];
 }
 
 function show(k){
   const d = DATA[k];
+  owned = new Set(d.badges);
   $('card').style.setProperty('--theme', d.theme);
   $('hero').src = d.hero;
   $('ava').style.backgroundImage = `url(${d.ava})`;
@@ -135,23 +174,50 @@ function show(k){
     `<div class="stat p"><b>${d.stats.pts}</b><span>赛季积分</span></div>`+
     `<div class="stat c"><b>${d.stats.coins}</b><span>🪙 金币</span></div>`+
     `<div class="stat"><b>${d.stats.games}</b><span>出席场次</span></div>`;
-  $('bc').textContent = d.badges.length + ' / 35 枚';
-  $('wall').innerHTML = d.badges.map(b => `<img src="badges/${b}.png" alt="">`).join('');
-  $('tiers').innerHTML = tiers(d.badges).map((t, i) =>
+  $('bc').textContent = owned.size + ' / 35 枚';
+  $('tiers').innerHTML = tiers(owned).map((t, i) =>
     `<div class="tier${t.done ? ' done' : ''}">`+
       `<div class="tn">${TINFO[i][0]}</div>`+
       `<div class="tmid"><div class="treq">${TINFO[i][1]}</div>`+
       `<div class="tbar"><i style="width:${Math.round(t.pct*100)}%"></i></div></div>`+
       `<div class="tval">${t.done ? '✓ 已达成' : '还差 ' + t.rem + ' ' + t.unit}</div>`+
     `</div>`).join('');
+  // 徽章图鉴 — all 35 grouped by category
+  let html = '';
+  CATS.forEach(c => {
+    const items = BADGES.filter(b => b.cat === c);
+    const got = items.filter(b => owned.has(b.id)).length;
+    html += `<div class="dexcat"><div class="dexhead ${got ? 'has' : 'none'}">${LABELS[c]}`+
+      `<span class="c">${got}/${items.length}</span></div><div class="dexgrid">`+
+      items.map(b => {
+        const lit = owned.has(b.id);
+        return `<div class="dexb ${lit?'lit':'lock'}" title="${esc(b.name)} — ${esc(b.desc)}" onclick="openLb('${b.id}')">`+
+          `<img src="badges/${b.id}.png" loading="lazy" alt=""></div>`;
+      }).join('') + `</div></div>`;
+  });
+  $('dex').innerHTML = html;
   ['kevin','qian','shuang'].forEach(x => $('t_'+x).classList.toggle('on', x===k));
 }
-// floating particles
+
+function openLb(id){
+  const b = BY_ID[id]; if (!b) return;
+  const lit = owned.has(id);
+  const img = $('lbimg'); img.src = `badges/${id}.png`; img.className = lit ? '' : 'lock';
+  $('lbn').textContent = b.name;
+  const r = $('lbr'); r.className = 'chip ' + RC[b.rarity]; r.textContent = RL[b.rarity];
+  $('lbd').textContent = b.desc;
+  const s = $('lbs');
+  if (lit) { s.className = 'lbs done'; s.textContent = '✓ 已获得'; }
+  else { s.className = 'lbs lock'; s.textContent = '🔒 未解锁 · ' + b.desc; }
+  $('lbx').classList.add('open');
+}
+function closeLb(){ $('lbx').classList.remove('open'); }
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
 $('parts').innerHTML = Array.from({length:16}, (_,i)=>{
   const x=Math.round((i*61+13)%100), d=(4+(i*7%5)), del=-(i*0.9%6), s=4+(i%3)*2;
   return `<i style="left:${x}%;width:${s}px;height:${s}px;animation-duration:${d}s;animation-delay:${del}s"></i>`;
 }).join('');
-// parallax (pointer + device tilt)
 const hw = $('heroWrap'), card = $('card');
 function px(dx,dy){ hw.style.transform = `translate(${dx*14}px,${dy*12}px) rotateY(${dx*5}deg) rotateX(${-dy*5}deg)`; }
 card.addEventListener('pointermove', e=>{ const r=card.getBoundingClientRect();
