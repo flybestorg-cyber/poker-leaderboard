@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>角色卡 Demo · 德州荣耀</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:radial-gradient(120% 80% at 50% 0%,#15161c,#070709 70%);color:#fff;
+    font-family:-apple-system,"PingFang SC",system-ui,sans-serif;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:14px}
+  .card{position:relative;width:min(380px,92vw);aspect-ratio:38/68;border-radius:24px;overflow:hidden;
+    background:#0a0a0c;border:1px solid color-mix(in srgb,var(--theme) 55%,#333);
+    box-shadow:0 0 0 1px rgba(0,0,0,.6),0 26px 60px rgba(0,0,0,.7);
+    animation:glow 4.5s ease-in-out infinite;perspective:900px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent}
+  @keyframes glow{0%,100%{box-shadow:0 0 34px -10px var(--theme),0 26px 60px rgba(0,0,0,.7)}
+    50%{box-shadow:0 0 64px -6px var(--theme),0 26px 60px rgba(0,0,0,.7)}}
+  .heroWrap{position:absolute;inset:-6% -6% -6% -6%;z-index:1;will-change:transform;transition:transform .12s ease-out}
+  .hero{width:100%;height:100%;object-fit:cover;object-position:50% 18%;animation:breathe 6s ease-in-out infinite;display:block}
+  @keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-12px) scale(1.022)}}
+  .parts{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
+  .parts i{position:absolute;bottom:-12px;width:6px;height:6px;border-radius:50%;
+    background:var(--theme);filter:blur(.4px);opacity:0;animation:drift linear infinite}
+  @keyframes drift{0%{transform:translateY(0);opacity:0}12%{opacity:.85}100%{transform:translateY(-118%);opacity:0}}
+  .vig{position:absolute;inset:0;z-index:3;pointer-events:none;
+    background:linear-gradient(180deg,rgba(4,4,6,.82) 0%,rgba(4,4,6,.15) 24%,
+      rgba(4,4,6,0) 46%,rgba(4,4,6,.55) 70%,rgba(4,4,6,.94) 100%)}
+  .top{position:absolute;top:0;left:0;right:0;z-index:4;padding:16px 16px 0;display:flex;gap:12px;align-items:center}
+  .ava{width:58px;height:58px;border-radius:50%;flex:none;background-size:cover;background-position:center 12%;
+    border:2px solid var(--theme);box-shadow:0 0 16px -2px var(--theme),inset 0 0 0 2px rgba(0,0,0,.4)}
+  .idw{flex:1;min-width:0}
+  .rk{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:1px;padding:2px 8px;border-radius:6px;
+    color:#1a1400;background:linear-gradient(135deg,#FFE070,var(--theme));box-shadow:0 2px 6px rgba(0,0,0,.4)}
+  .nm{font-size:25px;font-weight:900;line-height:1.1;margin-top:3px;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+  .ti{font-size:13px;font-weight:700;color:var(--theme);text-shadow:0 1px 6px rgba(0,0,0,.9);margin-top:1px}
+  .bot{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:0 14px 16px}
+  .stats{display:flex;gap:8px;margin-bottom:12px}
+  .stat{flex:1;background:rgba(12,12,16,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:8px 4px;text-align:center}
+  .stat b{display:block;font-size:19px;font-weight:900;line-height:1}
+  .stat span{font-size:10px;color:#aaa;margin-top:3px;display:block}
+  .stat.p b{color:#34c759}.stat.c b{color:#FFC700}
+  .lab{font-size:11.5px;font-weight:700;color:#cfcfd6;margin:0 2px 6px;display:flex;align-items:center;gap:6px}
+  .lab span{color:var(--theme)}
+  .wall{display:flex;gap:7px;margin-bottom:12px}
+  .wall img{width:46px;height:46px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6)) drop-shadow(0 0 6px color-mix(in srgb,var(--theme) 60%,transparent));
+    transition:transform .14s ease}
+  .wall img:active{transform:scale(.9)}
+  .items{display:flex;gap:7px}
+  .slot{flex:1;aspect-ratio:1;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    background:rgba(14,14,18,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border:1px solid color-mix(in srgb,var(--theme) 40%,rgba(255,255,255,.1));
+    box-shadow:inset 0 0 14px -8px var(--theme)}
+  .slot .e{font-size:21px;line-height:1}
+  .slot .n{font-size:8.5px;color:#bbb}
+  .slot.empty{opacity:.32;border-style:dashed}
+  .tabs{display:flex;gap:10px}
+  .tab{padding:8px 22px;border-radius:11px;border:1px solid #2a2a30;background:#16161b;color:#bbb;
+    font-size:14px;font-weight:800;cursor:pointer}
+  .tab.on{color:#1a1400;background:linear-gradient(135deg,#FFE070,var(--theme));border-color:transparent}
+  .hint{font-size:11px;color:#666}
+</style></head>
+<body>
+  <div class="card" id="card" style="--theme:#FFC233">
+    <div class="heroWrap" id="heroWrap"><img class="hero" id="hero" src="img/qian_full.png" alt=""></div>
+    <div class="parts" id="parts"></div>
+    <div class="vig"></div>
+    <div class="top">
+      <div class="ava" id="ava"></div>
+      <div class="idw"><span class="rk" id="rk">RANK 1</span>
+        <div class="nm" id="nm">钱钱</div><div class="ti" id="ti">💰 赌桌大亨</div></div>
+    </div>
+    <div class="bot">
+      <div class="stats" id="stats"></div>
+      <div class="lab"><span>🏆</span> 徽章墙 <span id="bc" style="margin-left:auto;color:#888"></span></div>
+      <div class="wall" id="wall"></div>
+      <div class="lab"><span>🎒</span> 道具 · 装备</div>
+      <div class="items" id="items"></div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab on" id="t_qian" onclick="show('qian')">钱钱</button>
+    <button class="tab" id="t_shuang" onclick="show('shuang')">爽哥</button>
+  </div>
+  <div class="hint">点标签切换角色 · 移动鼠标 / 倾斜手机 看视差</div>
+
+<script>
+const DATA = {
+  qian: {name:'钱钱', title:'💰 赌桌大亨', rank:'RANK 1', theme:'#FFC233',
+    hero:'img/qian_full.png', ava:'img/qian_avatar.png',
+    stats:{pts:128, coins:86, games:19},
+    badges:['whale','capitalist','centurion','legend_100','march_55'],
+    items:[['🕶️','墨镜'],['🥃','威士忌'],['💼','金箱'],['🃏','王牌'],['💎','钻戒']]},
+  shuang: {name:'爽哥', title:'🕶️ 老千之王', rank:'RANK 3', theme:'#25E0D0',
+    hero:'img/shuang_full.png', ava:'img/shuang_avatar.png',
+    stats:{pts:96, coins:64, games:15},
+    badges:['hh_12','koi_fh_12','iron_30','centurion'],
+    items:[['🕶️','墨镜'],['⚡','闪电'],['🎧','节奏'],['♠️','黑桃A'],null]},
+};
+const $ = id => document.getElementById(id);
+function show(k){
+  const d = DATA[k];
+  $('card').style.setProperty('--theme', d.theme);
+  $('hero').src = d.hero;
+  $('ava').style.backgroundImage = `url(${d.ava})`;
+  $('nm').textContent = d.name; $('ti').textContent = d.title; $('rk').textContent = d.rank;
+  $('stats').innerHTML =
+    `<div class="stat p"><b>${d.stats.pts}</b><span>赛季积分</span></div>`+
+    `<div class="stat c"><b>${d.stats.coins}</b><span>🪙 金币</span></div>`+
+    `<div class="stat"><b>${d.stats.games}</b><span>出席场次</span></div>`;
+  $('bc').textContent = d.badges.length + ' / 35';
+  $('wall').innerHTML = d.badges.map(b => `<img src="badges/${b}.png" alt="">`).join('');
+  $('items').innerHTML = d.items.map(it => it
+    ? `<div class="slot"><div class="e">${it[0]}</div><div class="n">${it[1]}</div></div>`
+    : `<div class="slot empty"><div class="e">＋</div></div>`).join('');
+  $('t_qian').classList.toggle('on', k==='qian');
+  $('t_shuang').classList.toggle('on', k==='shuang');
+}
+// floating particles
+$('parts').innerHTML = Array.from({length:16}, (_,i)=>{
+  const x=Math.round((i*61+13)%100), d=(4+(i*7%5)), del=-(i*0.9%6), s=4+(i%3)*2;
+  return `<i style="left:${x}%;width:${s}px;height:${s}px;animation-duration:${d}s;animation-delay:${del}s"></i>`;
+}).join('');
+// parallax (pointer + device tilt)
+const hw = $('heroWrap'), card = $('card');
+function px(dx,dy){ hw.style.transform = `translate(${dx*14}px,${dy*12}px) rotateY(${dx*5}deg) rotateX(${-dy*5}deg)`; }
+card.addEventListener('pointermove', e=>{ const r=card.getBoundingClientRect();
+  px((e.clientX-r.left)/r.width-.5, (e.clientY-r.top)/r.height-.5); });
+card.addEventListener('pointerleave', ()=>px(0,0));
+window.addEventListener('deviceorientation', e=>{
+  if(e.gamma==null) return; px(Math.max(-.5,Math.min(.5,e.gamma/45)), Math.max(-.5,Math.min(.5,(e.beta-40)/45))); });
+show('qian');
+</script>
+</body></html>
